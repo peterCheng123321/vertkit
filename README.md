@@ -34,10 +34,11 @@ This is the **core domain models + basic multi-tenant CRUD API** milestone.
 - In-memory storage for instant local feedback
 - Postgres storage via `DATABASE_URL`, with an idempotent RLS-ready schema
 - OpenAPI 3.1 contract in `openapi.yaml`
+- TypeScript agent backend in `apps/agent` with a tool registry, permission gates, audit log, OpenAI-compatible provider adapter, CRM API tools, CLI, and HTTP job endpoint
 
 **What is intentionally not here yet** (by design):
 - Full end-user authentication / authorization
-- Workflow engine, pipelines, or automation
+- Durable workflow persistence, queues, or scheduler
 - Frontend (React/TS layer coming in a later slice)
 - Custom field type system (we have a simple `map[string]any` escape hatch for now)
 - Invoicing, orders, inventory, or full ERP flows
@@ -113,6 +114,48 @@ curl -H "Authorization: Bearer $TOKEN" \
 ```
 
 Health check: `curl http://localhost:8080/health`
+
+## TypeScript Agent Backend
+
+VertKit now includes an original TypeScript agent runtime. It is not LangGraph. It is a small VertKit-owned harness for CRM automation and future code-building workflows:
+
+- `ToolRegistry` exposes typed CRM tools.
+- `PermissionPolicy` allows, denies, or pauses risky actions for approval.
+- `AgentRuntime` runs the provider/tool loop and writes an audit trail.
+- `OpenAICompatibleProvider` talks to any chat-completions-compatible model that returns JSON decisions.
+- `crmApiTools` call the Go CRM API with tenant context and service-token auth.
+- `createAgentServer` exposes `/health`, `/agent/tools`, and `/agent/jobs`.
+
+Run the agent CLI:
+
+```bash
+npm run agent:start -- tools
+npm run agent:start -- run "Summarize accounts for this tenant"
+```
+
+Run the HTTP agent service:
+
+```bash
+export VERTKIT_CRM_BASE_URL=http://127.0.0.1:8080
+export VERTKIT_SERVICE_TOKEN=dev-token
+export VERTKIT_AGENT_BASE_URL=https://api.openai.com/v1
+export VERTKIT_AGENT_API_KEY=...
+export VERTKIT_AGENT_MODEL=...
+
+npm run agent:start -- serve --port 8787
+```
+
+Submit a job:
+
+```bash
+curl -X POST http://127.0.0.1:8787/agent/jobs \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tenant_id": "acme",
+    "actor": "agent:http",
+    "goal": "List accounts and identify missing contacts"
+  }'
+```
 
 ## How Agents Customize VertKit
 
@@ -221,6 +264,7 @@ This is the beginning of the "agent embedded" experience: agents can propose opp
 
 ```
 vertkit/
+├── apps/agent/                 # TypeScript agent backend and CLI
 ├── cmd/server/main.go          # entrypoint
 ├── internal/
 │   ├── domain/                 # the heart — pure, global-first types
@@ -241,6 +285,7 @@ vertkit/
 │       ├── rule.go
 │       └── engine.go
 ├── README.md
+├── package.json
 ├── openapi.yaml
 └── go.mod
 ```
@@ -248,12 +293,13 @@ vertkit/
 ## Roadmap (High Level)
 
 1. **Foundation v1** (current) — tenant-safe CRUD, Postgres, OpenAPI
-2. Typed custom fields + simple validation hooks
-3. Python LangGraph service for agent workflows, approvals, and automation
-4. Basic workflow / state machine primitives
-5. TypeScript client + thin React reference UI
-6. "create-vertkit" CLI / npm experience
-7. Reference vertical modules (e.g. professional services, manufacturing, SaaS)
+2. **Agent runtime v1** (current) — TypeScript tool registry, permission gates, audit log, CRM API tools, and HTTP job endpoint
+3. Typed custom fields + validation hooks
+4. Durable agent jobs with queueing, approvals, retries, and persisted audit events
+5. Basic workflow / state machine primitives
+6. TypeScript client + thin React reference UI
+7. "create-vertkit" CLI / npm experience
+8. Reference vertical modules (e.g. professional services, manufacturing, SaaS)
 
 ## Contributing & Philosophy
 
@@ -275,7 +321,7 @@ VertKit includes a reusable Claude/Codex skill for future CRM work:
 - Codex plugin manifest: `.codex-plugin/plugin.json`
 
 The skill teaches future agents the VertKit architecture, tenant-safety invariants,
-core-vs-vertical module decisions, and LangGraph workflow boundary.
+core-vs-vertical module decisions, and the TypeScript agent runtime boundary.
 
 ---
 

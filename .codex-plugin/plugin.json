@@ -1,7 +1,7 @@
 {
   "name": "vertkit-crm-builder",
-  "version": "0.1.0",
-  "description": "VertKit CRM/ERP backend foundation and skill for building tenant-safe vertical CRM systems",
+  "version": "0.2.0",
+  "description": "VertKit CRM/ERP backend foundation and skill for building tenant-safe vertical CRM systems with a TypeScript agent runtime",
   "author": {
     "name": "Peter Cheng",
     "url": "https://github.com/peterCheng123321"
@@ -14,7 +14,7 @@
     "erp",
     "vertkit",
     "agents",
-    "langgraph",
+    "typescript-agent",
     "postgres",
     "openapi",
     "tenant-isolation"
@@ -22,8 +22,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "VertKit CRM Builder",
-    "shortDescription": "Build tenant-safe CRM/ERP backends and agent workflows on VertKit.",
-    "longDescription": "VertKit CRM Builder packages the VertKit backend foundation plus a reusable agent skill for extending CRM/ERP systems safely. It guides core platform work, vertical CRM modules, Postgres/OpenAPI contracts, business rules, and LangGraph workflow boundaries.",
+    "shortDescription": "Build tenant-safe CRM/ERP backends and TypeScript agent workflows on VertKit.",
+    "longDescription": "VertKit CRM Builder packages the VertKit backend foundation plus a reusable agent skill for extending CRM/ERP systems safely. It guides core platform work, vertical CRM modules, Postgres/OpenAPI contracts, business rules, and the TypeScript agent runtime boundary.",
     "developerName": "Peter Cheng",
     "category": "Developer Tools",
     "capabilities": [
@@ -33,7 +33,7 @@
     "websiteURL": "https://github.com/peterCheng123321/vertkit",
     "defaultPrompt": [
       "Add a tenant-safe CRM entity to VertKit.",
-      "Design a LangGraph workflow for VertKit.",
+      "Design a TypeScript agent workflow for VertKit.",
       "Build a vertical CRM module on VertKit."
     ],
     "brandColor": "#2563EB"

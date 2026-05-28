@@ -1,7 +1,7 @@
 {
   "name": "vertkit-crm-builder",
-  "description": "VertKit CRM/ERP backend foundation and Claude Code skill for building tenant-safe vertical CRM systems",
-  "version": "0.1.0",
+  "description": "VertKit CRM/ERP backend foundation and Claude Code skill for building tenant-safe vertical CRM systems with a TypeScript agent runtime",
+  "version": "0.2.0",
   "author": {
     "name": "Peter Cheng"
   },
@@ -13,7 +13,7 @@
     "erp",
     "vertkit",
     "agents",
-    "langgraph",
+    "typescript-agent",
     "postgres",
     "openapi",
     "tenant-isolation"

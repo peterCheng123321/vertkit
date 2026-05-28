@@ -1,11 +1,11 @@
 ---
 name: vertkit-crm-builder
-description: Use when building or extending VertKit CRM/ERP systems, vertical CRM modules, tenant-scoped backend features, Postgres/OpenAPI persistence contracts, service-token integrations, business rules, or LangGraph agent workflows that operate on CRM data.
+description: Use when building or extending VertKit CRM/ERP systems, vertical CRM modules, tenant-scoped backend features, Postgres/OpenAPI persistence contracts, service-token integrations, business rules, or the TypeScript agent runtime that operates on CRM data.
 ---
 
 # VertKit CRM Builder
 
-VertKit is a tenant-safe CRM/ERP backend foundation for vertical builders. Use the Go API and Postgres as the system of record; use LangGraph only for durable workflows that call the API.
+VertKit is a tenant-safe CRM/ERP backend foundation for vertical builders. Use the Go API and Postgres as the system of record; use the TypeScript agent runtime for tool routing, permissions, model-provider calls, and CRM automation.
 
 ## Start Here
 
@@ -13,7 +13,7 @@ VertKit is a tenant-safe CRM/ERP backend foundation for vertical builders. Use t
 2. Classify the request:
    - **Core platform**: reusable CRM behavior. Read [references/backend-foundation.md](references/backend-foundation.md).
    - **Vertical CRM module**: industry-specific behavior. Read [references/vertical-modules.md](references/vertical-modules.md).
-   - **Agent workflow / LangGraph**: orchestration, approvals, enrichment, or human review. Read [references/langgraph-boundary.md](references/langgraph-boundary.md).
+   - **Agent runtime / automation**: orchestration, approvals, enrichment, or human review. Read [references/agent-runtime.md](references/agent-runtime.md).
 3. Use TDD for behavior changes. Add tests before implementation.
 4. Run `scripts/verify_vertkit.sh` before claiming completion.
 
@@ -32,8 +32,8 @@ VertKit is a tenant-safe CRM/ERP backend foundation for vertical builders. Use t
 
 - Go core API owns CRM records and authorization boundaries.
 - Postgres owns durable business state and tenant-aware persistence.
-- REST + OpenAPI is the public contract for apps, SDKs, agents, and LangGraph.
-- Python LangGraph owns workflow state, checkpoints, retries, approvals, and traces. It must call VertKit APIs instead of writing CRM tables directly.
+- REST + OpenAPI is the public contract for apps, SDKs, and agents.
+- TypeScript agent runtime owns tool routing, provider calls, permission checks, and audit events. It must call VertKit APIs instead of writing CRM tables directly.
 
 ## Common Workflows
 
@@ -49,9 +49,9 @@ Read [references/vertical-modules.md](references/vertical-modules.md). Prefer `c
 
 Keep rules agent-generatable. Field paths use JSON names like `amount`, `currency`, and `custom_fields.region`. Add regression tests for every new operator, path shape, or action.
 
-**Add LangGraph automation**
+**Add agent automation**
 
-Read [references/langgraph-boundary.md](references/langgraph-boundary.md). Treat LangGraph proposals as workflow outputs that call VertKit APIs with tenant context and service credentials.
+Read [references/agent-runtime.md](references/agent-runtime.md). Treat agent proposals as workflow outputs that call VertKit APIs with tenant context and service credentials.
 
 ## Completion Bar
 

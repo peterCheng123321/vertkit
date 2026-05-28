@@ -1,0 +1,22 @@
+{
+  "name": "vertkit",
+  "version": "0.2.0",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "vertkit-agent": "apps/agent/src/cli.ts"
+  },
+  "scripts": {
+    "agent:test": "node --experimental-strip-types --test \"apps/agent/src/**/*.test.ts\"",
+    "agent:typecheck": "tsc --noEmit",
+    "agent:start": "node --experimental-strip-types apps/agent/src/cli.ts",
+    "test": "npm run agent:test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
+  }
+}

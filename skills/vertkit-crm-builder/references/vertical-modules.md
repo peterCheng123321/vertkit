@@ -10,7 +10,7 @@ Before changing core structs, decide:
 - **Specific to one industry or workflow**: vertical module candidate.
 - **Simple extra field**: use `custom_fields`.
 - **Validation/approval**: use rules first.
-- **Long-running process**: consider LangGraph workflow after core API support exists.
+- **Long-running process**: consider the TypeScript agent runtime after core API support exists.
 
 Default to module-specific behavior unless the concept is obviously foundational.
 

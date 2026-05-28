@@ -8,6 +8,9 @@ dist/
 coverage.out
 *.test
 
+# Node / TypeScript
+node_modules/
+
 # Local environment
 .env
 .env.*
