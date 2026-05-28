@@ -1,0 +1,408 @@
+openapi: 3.1.0
+info:
+  title: VertKit Foundation API
+  version: 0.1.0
+  description: Tenant-scoped CRM foundation API for agent-safe vertical applications.
+servers:
+  - url: http://localhost:8080
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      security: []
+      responses:
+        "200":
+          description: Service health.
+  /tenants:
+    post:
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantInput"
+      responses:
+        "201":
+          description: Tenant created.
+    get:
+      responses:
+        "200":
+          description: Tenants.
+  /tenants/{id}:
+    parameters:
+      - $ref: "#/components/parameters/TenantID"
+    get:
+      responses:
+        "200":
+          description: Tenant.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantInput"
+      responses:
+        "200":
+          description: Tenant updated.
+    delete:
+      responses:
+        "204":
+          description: Tenant deleted.
+  /tenants/{tenant_id}/accounts:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountInput"
+      responses:
+        "201":
+          description: Account created.
+    get:
+      responses:
+        "200":
+          description: Accounts.
+  /tenants/{tenant_id}/accounts/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+      - $ref: "#/components/parameters/EntityID"
+    get:
+      responses:
+        "200":
+          description: Account.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountInput"
+      responses:
+        "200":
+          description: Account updated.
+    delete:
+      responses:
+        "204":
+          description: Account deleted.
+  /tenants/{tenant_id}/contacts:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "201":
+          description: Contact created.
+    get:
+      responses:
+        "200":
+          description: Contacts.
+  /tenants/{tenant_id}/contacts/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+      - $ref: "#/components/parameters/EntityID"
+    get:
+      responses:
+        "200":
+          description: Contact.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "200":
+          description: Contact updated.
+    delete:
+      responses:
+        "204":
+          description: Contact deleted.
+  /tenants/{tenant_id}/opportunities:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpportunityInput"
+      responses:
+        "201":
+          description: Opportunity created.
+    get:
+      responses:
+        "200":
+          description: Opportunities.
+  /tenants/{tenant_id}/opportunities/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+      - $ref: "#/components/parameters/EntityID"
+    get:
+      responses:
+        "200":
+          description: Opportunity.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpportunityInput"
+      responses:
+        "200":
+          description: Opportunity updated.
+    delete:
+      responses:
+        "204":
+          description: Opportunity deleted.
+  /tenants/{tenant_id}/products:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "201":
+          description: Product created.
+    get:
+      responses:
+        "200":
+          description: Products.
+  /tenants/{tenant_id}/products/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+      - $ref: "#/components/parameters/EntityID"
+    get:
+      responses:
+        "200":
+          description: Product.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "200":
+          description: Product updated.
+    delete:
+      responses:
+        "204":
+          description: Product deleted.
+  /tenants/{tenant_id}/rules:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleInput"
+      responses:
+        "201":
+          description: Rule created.
+    get:
+      responses:
+        "200":
+          description: Rules.
+  /tenants/{tenant_id}/rules/{id}:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+      - $ref: "#/components/parameters/EntityID"
+    get:
+      responses:
+        "200":
+          description: Rule.
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RuleInput"
+      responses:
+        "200":
+          description: Rule updated.
+    delete:
+      responses:
+        "204":
+          description: Rule deleted.
+  /tenants/{tenant_id}/rules/evaluate/opportunity:
+    parameters:
+      - $ref: "#/components/parameters/PathTenantID"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [opportunity]
+              properties:
+                opportunity:
+                  $ref: "#/components/schemas/Opportunity"
+                operation:
+                  type: string
+      responses:
+        "200":
+          description: Rule evaluation summary.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    TenantID:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    PathTenantID:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    EntityID:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    TenantInput:
+      type: object
+      required: [id, name, default_currency]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        default_currency:
+          type: string
+        default_locale:
+          type: string
+    Money:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount:
+          type: integer
+          format: int64
+        currency:
+          type: string
+    AccountInput:
+      type: object
+      required: [name]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        website:
+          type: string
+        industry:
+          type: string
+        status:
+          type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    ContactInput:
+      type: object
+      required: [first_name, last_name]
+      properties:
+        id:
+          type: string
+        account_id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Opportunity:
+      type: object
+      additionalProperties: true
+    OpportunityInput:
+      type: object
+      required: [account_id, name, amount, currency]
+      properties:
+        id:
+          type: string
+        account_id:
+          type: string
+        name:
+          type: string
+        amount:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        custom_fields:
+          type: object
+          additionalProperties: true
+    ProductInput:
+      type: object
+      required: [name, price, currency]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        active:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
+    RuleInput:
+      type: object
+      required: [id, name, entity_type, conditions, actions]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        entity_type:
+          type: string
+        conditions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        actions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        is_active:
+          type: boolean

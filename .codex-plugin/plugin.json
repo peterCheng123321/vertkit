@@ -1,0 +1,41 @@
+{
+  "name": "vertkit-crm-builder",
+  "version": "0.1.0",
+  "description": "VertKit CRM/ERP backend foundation and skill for building tenant-safe vertical CRM systems",
+  "author": {
+    "name": "Peter Cheng",
+    "url": "https://github.com/peterCheng123321"
+  },
+  "homepage": "https://github.com/peterCheng123321/vertkit",
+  "repository": "https://github.com/peterCheng123321/vertkit",
+  "license": "MIT",
+  "keywords": [
+    "crm",
+    "erp",
+    "vertkit",
+    "agents",
+    "langgraph",
+    "postgres",
+    "openapi",
+    "tenant-isolation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "VertKit CRM Builder",
+    "shortDescription": "Build tenant-safe CRM/ERP backends and agent workflows on VertKit.",
+    "longDescription": "VertKit CRM Builder packages the VertKit backend foundation plus a reusable agent skill for extending CRM/ERP systems safely. It guides core platform work, vertical CRM modules, Postgres/OpenAPI contracts, business rules, and LangGraph workflow boundaries.",
+    "developerName": "Peter Cheng",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Code",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/peterCheng123321/vertkit",
+    "defaultPrompt": [
+      "Add a tenant-safe CRM entity to VertKit.",
+      "Design a LangGraph workflow for VertKit.",
+      "Build a vertical CRM module on VertKit."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

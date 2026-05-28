@@ -1,0 +1,21 @@
+{
+  "name": "vertkit-crm-builder",
+  "description": "VertKit CRM/ERP backend foundation and Claude Code skill for building tenant-safe vertical CRM systems",
+  "version": "0.1.0",
+  "author": {
+    "name": "Peter Cheng"
+  },
+  "homepage": "https://github.com/peterCheng123321/vertkit",
+  "repository": "https://github.com/peterCheng123321/vertkit",
+  "license": "MIT",
+  "keywords": [
+    "crm",
+    "erp",
+    "vertkit",
+    "agents",
+    "langgraph",
+    "postgres",
+    "openapi",
+    "tenant-isolation"
+  ]
+}

@@ -1,0 +1,23 @@
+.DS_Store
+*.log
+*.tmp
+
+# Go build/test output
+bin/
+dist/
+coverage.out
+*.test
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Local database and generated data
+*.db
+*.sqlite
+*.sqlite3
+
+# Editor state
+.idea/
+.vscode/

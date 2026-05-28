@@ -1,0 +1,19 @@
+{
+  "name": "vertkit",
+  "description": "VertKit CRM/ERP backend foundation and agent workflow skills",
+  "owner": {
+    "name": "Peter Cheng"
+  },
+  "plugins": [
+    {
+      "name": "vertkit-crm-builder",
+      "displayName": "VertKit CRM Builder",
+      "description": "Build tenant-safe CRM/ERP backends, vertical modules, and LangGraph workflows on VertKit",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Peter Cheng"
+      }
+    }
+  ]
+}
